@@ -1,0 +1,20 @@
+{
+  "name": "shoot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Create.js",
+  "dependencies": {
+    "async": "^2.6.1",
+    "csv-parse": "^4.4.1",
+    "download": "^7.1.0",
+    "lodash": "^4.17.11",
+    "node-datetime": "^2.1.2",
+    "node-rest-client": "^3.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
