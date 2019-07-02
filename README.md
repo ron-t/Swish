@@ -1,2 +1,4 @@
 # Swish
-Quiz automation scripts for Canvas LMS
+Node.js quiz automation scripts for Canvas LMS.
+
+Documentation and WebUI forthcoming.
