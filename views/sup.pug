@@ -1,0 +1,129 @@
+extends layout
+
+
+block content
+  .pb-2.mt-2.mb-4.border-bottom
+    h3 Quiz setup inputs form
+
+  -
+    /*** Default form values ***/
+
+    // domain
+    betaDomainSelected = false
+    prodDomainSelected = false
+    testDomainSelected = false
+    if (domain === undefined || !domain || domain === 'auckland.beta.instructure.com') {
+      betaDomainSelected = true
+    } else if (domain === 'auckland.instructure.com') {
+      prodDomainSelected = true
+    } else if (domain === 'auckland.test.instructure.com') {
+      testDomainSelected = true
+    }
+
+    // attempts
+    if (attempts === undefined || !attempts || attempts === "") {
+      attempts = -1
+    }
+
+    /*** End default form values ***/
+    
+
+  script.
+    function checkCourseCode () {
+      console.log("I'm supposed to be checking the course code here.")
+    }
+
+    $(document).ready(function () {
+      // async course code checking
+      $('#2').change('input', checkCourseCode)
+
+      // maintain scroll position when clicking 'submit'
+      if (Cookies.get('scroll') !== null) {
+        $(document).scrollTop(Cookies.get('scroll'))
+        Cookies.remove('scroll')
+      }
+
+      $('#submit').on('click', function () {
+        Cookies.set('scroll', $(document).scrollTop())
+      })
+    })
+
+  //- end of jQuery script logic.
+
+  form(method='POST', enctype='multipart/form-data')
+    input(type='hidden', name='_csrf', value=_csrf)
+    .form-group.row
+      label(class='col-md-3 col-form-label font-weight-bold', for='token') Token
+      .col-md-8
+        input.form-control(type='password', name='token', id='token', value=token)
+    .form-group.row
+      label(class='col-md-3 col-form-label font-weight-bold', for='domain') Domain
+      .col-md-8
+        select#propertyType.select.form-control(name='domain')
+          option(value='auckland.instructure.com', selected=prodDomainSelected) auckland.instructure.com
+          option(value='auckland.beta.instructure.com', selected=betaDomainSelected) auckland.beta.instructure.com
+          option(value='auckland.test.instructure.com', selected=testDomainSelected) auckland.test.instructure.com
+    .form-group.row
+      label(class='col-md-3 col-form-label font-weight-bold', for='course_id') Course ID
+      .col-md-8
+        input.form-control(type='text', name='course_id', id='course_id', value=course_id)
+    .form-group.row
+      label(class='col-md-3 col-form-label font-weight-bold', for='qafile') Q&amp;A file
+      .col-md-8
+        input.form-control-file(type='file', name='qafile', id='qafile', value=qafile)
+    .form-group.row
+      label(class='col-md-3 col-form-label font-weight-bold', for='assignmentTitle') Assignment title prefix
+      .col-md-8
+        input.form-control(type='text', name='assignmentTitle', id='assignmentTitle', value=assignmentTitle)
+    .form-group.row
+      label(class='col-md-3 col-form-label font-weight-bold', for='totalMarks') Total marks
+      .col-md-8
+        input.form-control(type='text', name='totalMarks', id='totalMarks', value=totalMarks)
+    .form-group.row
+      label(class='col-md-3 col-form-label font-weight-bold', for='numQuestions') Number of questions
+      .col-md-8
+        input.form-control(type='text', name='numQuestions', id='numQuestions', value=numQuestions)
+    .form-group.row
+      label(class='col-md-3 col-form-label font-weight-bold', for='7') [derive marks per Q]
+      .col-md-8
+        input.form-control(type='text', name='7', id='7', value=totalMarks/numQuestions)
+    .form-group.row
+      label(class='col-md-3 col-form-label font-weight-bold', for='lock') Lock date time (format in yyyy/mm/dd HH:MM:SS)
+      .col-md-8
+        input.form-control(type='text', name='lock', id='lock', placeholder='Leave blank for no lock date')
+    .form-group.row
+      label(class='col-md-3 col-form-label font-weight-bold', for='attempts', data-toggle="tooltip", data-placement="right", title="-1 means unlimited attempts") Number of attempts
+      .col-md-8
+        input.form-control(type='text', name='attempts', id='attempts', value=attempts, placeholder='-1 means unlimited attempts', data-toggle="tooltip", data-placement="right", title="-1 means unlimited attempts")
+    .form-group.row
+      label(class='col-md-3 col-form-label font-weight-bold', for='tmp') tmp
+      .col-md-8
+        textarea.form-control(name='tmp', id='tmp', rows='3', autofocus=(!unknownUser).toString())
+    .form-group
+      .offset-md-3.col-md-8.p-1
+        button.btn.btn-primary(type='submit', id='submit')
+          | Submit 
+          i.fas.fa-seedling.fa-sm
+  
+  h3 🐞 DEBUGGING
+
+  textarea(rows="15", cols="120") req.body = #{errthing}
+
+  p domain 
+    span.text-info (drop down menu)
+  p course id 
+    span.text-info (resolve async to preview course name and created time; disable submit button while this happens)
+  p input file for Q&amp;A 
+    span.text-info (parse for errors and checks against student list etc.; disable submit button while this happens)
+  p assignment title 
+    span.text-info is represented as "title for ID#""
+  p total marks per quiz
+  p number of questions per quiz
+  p marks per question (derived)
+
+  p lock date (opt; else never)
+  p number of attempts (opt; else -1 (inf))
+  p starting question number (opt; else 1)
+    
+  p BUTTON 
+    span.text-info (async(ajax) or POST?)
