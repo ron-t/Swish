@@ -1,15 +1,15 @@
 {
-  "name": "hackathon-starter",
-  "version": "5.1.4",
-  "description": "A boilerplate for Node.js web applications",
+  "name": "swish-ui",
+  "version": "0.0.1",
+  "description": "The web user interface for Swish - Quiz automation scripts for Canvas LMS",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sahat/hackathon-starter.git"
+    "url": "https://github.com/HexaCubist/Swish-UI.git"
   },
-  "license": "MIT",
-  "author": "Sahat Yalkabov",
+  "license": "Unlicense",
+  "author": "Zac Miller-Waugh",
   "contributors": [
-    "Yashar Fakhari (https://github.com/YasharF)"
+    "Ron Tiong (https://github.com/ron-t)"
   ],
   "scripts": {
     "postinstall": "npm rebuild node-sass",
