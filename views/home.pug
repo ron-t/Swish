@@ -1,15 +1,50 @@
 extends layout
 
 block content
-  h1.title Step One
-  p.help Upload your quiz questions as an Excel or CSV file. If you're not sure how to make this file, get in touch with Ron Tiong at r.tiong@auckland.ac.nz for more information.
-  form(action='/upload')#main-form
-    input(type='hidden', name='_csrf', value=_csrf)
-    .card.upload#upload-zone
-      .card-body
-        h1 DRAG & DROP
-        p.lead Or click to upload a file
-        p.bottom Supported types: csv, xls, xlsx
-      .fallback
-        input(name='file',type='file',multiple)
-    input(type='submit').btn.btn-large.btn-success
+  form(action='/upload',method='push')#main-form
+    #step1
+      h1.title Step One
+      p.help Upload your quiz questions as an Excel or CSV file. If you're not sure how to make this file, get in touch with Ron Tiong at r.tiong@auckland.ac.nz for more information.
+      input(type='hidden', name='_csrf', value=_csrf)
+      .card.upload#upload-zone
+        .card-body
+          h1 DRAG & DROP
+          p.lead Or click to upload a file
+          p.bottom Supported types: csv, xls, xlsx
+        .fallback: input(name='file',type='file')
+    #step2.container
+      h1.title Step Two
+      p.help Fill out the following information. You can find out how to get your Token & Course ID 
+        a(href='#') here
+      .row
+        .form-group.col-sm
+          label(for='token') Token *
+          input(required,type='password',placeholder='Enter your canvas token').form-control#token
+      .row
+        .form-group.col-sm
+          label(for='domain') Domain *
+          input(required,type='text',placeholder='Enter your Domain',value='https://auckland.instructure.com:443').form-control#domain
+        .form-group.col-sm
+          label(for='courseid') Course ID *
+          input(required,type='text',placeholder='Enter your course ID').form-control#courseid
+      .row
+        .form-group.col-sm-6
+          label(for='prefix') Assignment Title Prefix *
+          input(required,type='text',placeholder='Enter the assignment title prefix').form-control#prefix
+        .form-group.col-sm-3
+          label(for='numqs') Number of Questions *
+          input(required,type='number',min='0',placeholder='Enter the number of questions').form-control#numqs
+        .form-group.col-sm-3
+          label(for='totalmarks') Total Marks *
+          input(required,type='number',min='0',placeholder='Enter the total # of marks').form-control#totalmarks
+      .row
+        .form-group.col-sm-6
+          label(for='derivemarks') Derive marks per Q (optional)
+          input(type='number',placeholder='Enter the derive marks per Q (optional)').form-control#derivemarks
+        .form-group.col-sm-3
+          label(for='lockdatetime') Lock Date Time *
+          input(required,type='text',placeholder='lock date/time').form-control.datetimepicker#lockdatetime
+        .form-group.col-sm-3
+          label(for='maxattempts') Number of Attempts
+          input(type='number',placeholder='Leave blank for unlimited').form-control#maxattempts
+      input(type='submit',value='begin').btn.btn-large.btn-success.float-right
