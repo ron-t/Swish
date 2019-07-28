@@ -3,8 +3,13 @@ extends layout
 block content
   h1.title Step One
   p.help Upload your quiz questions as an Excel or CSV file. If you're not sure how to make this file, get in touch with Ron Tiong at r.tiong@auckland.ac.nz for more information.
-  .card.upload
-    .card-body
-      h1 DRAG & DROP
-      p.lead Or click to upload a file
-      p.bottom Supported types: csv, xls, xlsx
+  form(action='/upload')#main-form
+    input(type='hidden', name='_csrf', value=_csrf)
+    .card.upload#upload-zone
+      .card-body
+        h1 DRAG & DROP
+        p.lead Or click to upload a file
+        p.bottom Supported types: csv, xls, xlsx
+      .fallback
+        input(name='file',type='file',multiple)
+    input(type='submit').btn.btn-large.btn-success

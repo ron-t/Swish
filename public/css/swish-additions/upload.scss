@@ -1,8 +1,49 @@
-.upload {
+#upload-zone {
     overflow: hidden;
     max-width: 600px;
     margin: auto;
-}
-.upload .card-body {
+    display: block;
+    cursor: pointer;
     background: #F5F5F5;
+    position: relative;
+}
+  #upload-zone .dz-preview {
+    position: relative;
+    display: inline-block;
+    width: 120px;
+    margin: 0.5em; }
+    #upload-zone .dz-preview .dz-progress {
+      display: block;
+      height: 15px;
+      border: 1px solid #aaa; }
+      #upload-zone .dz-preview .dz-progress .dz-upload {
+        display: block;
+        height: 100%;
+        width: 0;
+        background: green; }
+    #upload-zone .dz-preview .dz-error-message {
+      color: red;
+      display: none; }
+    #upload-zone .dz-preview.dz-error .dz-error-message, #upload-zone .dz-preview.dz-error .dz-error-mark {
+      display: block; }
+    #upload-zone .dz-preview.dz-success .dz-success-mark {
+      display: block; }
+    #upload-zone .dz-preview .dz-error-mark, #upload-zone .dz-preview .dz-success-mark {
+      position: absolute;
+      display: none;
+      left: 30px;
+      top: 30px;
+      width: 54px;
+      height: 58px;
+      left: 50%;
+      margin-left: -27px; }
+
+#upload-zone .card-body {
+    pointer-events: none;
+    user-select: none;
+    transition: 0.25s ease;
+}
+
+#upload-zone.dz-drag-hover .card-body {
+    opacity: 0.5;
 }
