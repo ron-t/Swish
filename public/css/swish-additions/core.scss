@@ -1,0 +1,32 @@
+body {
+    background-image: url(/img/bg-2.jpg);
+    background-image: linear-gradient(to bottom, #00000085, transparent),url(/img/bg-2.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll,fixed;
+    min-height: 100vh;
+}
+
+header .logo path {
+    fill: white;
+}
+
+header {
+    width: 300px;
+    margin: auto;
+    padding-top: 3em;
+}
+
+.title {
+    font-family: 'Amatic SC';
+    text-align: center;
+    font-size: 4rem;
+}
+
+footer {
+    color: white;
+}
+
+main {
+    text-align: center;
+}
