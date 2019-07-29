@@ -12,6 +12,11 @@ block content
           p.lead Or click to upload a file
           p.bottom Supported types: csv, xls, xlsx
         .fallback: input(name='file',type='file')
+        .log#error
+          h4 Uh oh! Swish encountered an error while reading your file:
+          pre
+        .log#success
+          h4 File read successful!
     #step2.container
       h1.title Step Two
       p.help Fill out the following information. You can find out how to get your Token & Course ID 

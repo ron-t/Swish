@@ -100,3 +100,41 @@ div#upload-zone.dz-started .card-body {
     text-decoration: none;
     text-transform: uppercase;
 }
+
+
+// Error/Success log box
+.log#error{background: #FBE9E7;}
+.log#success{background: #E8F5E9;}
+.log {
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+    width: 100%;
+    border: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 0em 2em 0em 2em;
+    font-weight: bold;
+    transition: 0.25s ease all;
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+}
+.log#error pre{color: #E91E63;}
+.log pre {
+    margin: 0;
+}
+
+.log.show#success{padding: 1em 2em 1em 2em;}
+.log.show {
+    padding: 1em 2em 0em 2em;
+    opacity: 1;
+    visibility: visible;
+    height: auto;
+}
+
+.log.show pre {
+    margin: 1em 0px;
+}

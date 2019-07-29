@@ -75,7 +75,8 @@
     "tumblr.js": "^2.0.2",
     "twilio": "^3.33.2",
     "twit": "^2.2.11",
-    "validator": "^11.1.0"
+    "validator": "^11.1.0",
+    "xlsx": "^0.14.4"
   },
   "devDependencies": {
     "chai": "^4.2.0",

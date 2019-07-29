@@ -1,7 +1,6 @@
 /* eslint-disable func-names */
 /* eslint-env jquery, browser */
 $(document).ready(() => {
-
   // Create dropzone form
   $('#upload-zone').dropzone({
     url: '/upload',
@@ -39,8 +38,23 @@ $(document).ready(() => {
 
       // Source: https://stackoverflow.com/a/26035954/3902950
       this.on('maxfilesexceeded', function (file) {
+        console.log('User adding new file, remove existing.');
+        
         this.removeAllFiles();
         this.addFile(file);
+      });
+
+      // Validate file on upload
+      this.on('addedfile', (file) => {
+        const reader = new FileReader();
+        reader.onload = validate;
+        reader.readAsArrayBuffer(file);
+      });
+
+      // Clear validation on new file
+      this.on('removedfile', () => {
+        $('.log').removeClass('show');
+        $('.log pre').text('');
       });
 
       // Show next step when files added
@@ -67,3 +81,44 @@ $(document).ready(() => {
   // Hide step 2 using JavaScript (so that it remains visible without JS)
   $('#step2').animate({ opacity: 1, height: 'toggle' }, 0);
 });
+
+function showlog(type, area, message) {
+  // Show either a success log or an error log on either the upload or full form box.
+  // Type can be one of success or fail
+  // Area can be one of upload or form
+  const selector = `.${area} .log#${type}`;
+  if (type === 'success') {
+    // $(`.${selector} pre`).text(message);
+  } else {
+    $(`${selector} pre`).text(message);
+  }
+  $(selector).toggleClass('show');
+}
+
+function validate(e) {
+  try {
+    console.log('Loading workbook..')
+    const data = new Uint8Array(e.target.result);
+    const workbook = XLSX.read(data, { type: 'array' });
+
+    // Confirm workbook has data
+    if ($.isEmptyObject(workbook.Sheets)) {
+      // Workbook is empty!
+      showlog('error', 'upload', 'The file you uploaded is either invalid or an empty spreadsheet!\nMake sure the file is one of the following:\n\nExcel Spreadsheets (xls,xlsx,xlsxm, etc)\nDelimiter-Separated Values (CSV/TXT)\nOpenDocument Spreadsheet (ODS)\nor any other common spreadsheet file.');
+      return;
+    }
+
+    console.log('Workbook found! Processing...');
+    console.log(workbook);
+    const sheetData = XLSX.utils.sheet_to_json(workbook.Sheets.Sheet1);
+    console.log('Converted to JSON object.');
+    console.log(sheetData);
+    console.log('Confirming data is valid');
+    
+  } catch (error) {
+    // Processing failed for uncatched reason. Log the error and show it to the user.
+    console.log('Loading failed!');
+    console.log(error);
+    showlog('error', 'upload', error);
+  }
+}
