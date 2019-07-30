@@ -15,9 +15,11 @@ function showlog(type, area, message) {
   // Type can be one of success or fail
   // Area can be one of upload or form
   console.log(`Showing log with message: ${message}`);
+  // Hide existing logs
+  $('.log').removeClass('show');
   const selector = `.${area} .log#${type}`;
   if (type === 'success') {
-    // $(`.${selector} pre`).text(message);
+    $(`${selector} pre`).text(message);
   } else {
     $(`${selector} pre`).text(message);
   }
@@ -149,6 +151,8 @@ function validate(e) {
     console.log('Converted to JSON object.');
     console.log(sheetData);
     console.log('Confirming data is valid');
+    // TODO: Confirm data is valid
+    showlog('success', 'upload', JSON.stringify(sheetData[0], null, 2));
     
   } catch (error) {
     // Processing failed for uncatched reason. Log the error and show it to the user.
