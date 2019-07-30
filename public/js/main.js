@@ -1,12 +1,52 @@
-/* eslint-disable func-names */
+/* eslint-disable func-names, no-undef */
 /* eslint-env jquery, browser */
+// eslint-disable-next-line no-unused-vars
+Dropzone.prototype._uploadData = (files, dataBlocks) => {
+  // Monkey-patch default uploading with custom validation & processing.
+  console.log('Beginning processing...');
+  const reader = new FileReader();
+  // eslint-disable-next-line no-use-before-define
+  reader.onload = validate;
+  reader.readAsArrayBuffer(files[0]);
+};
+
+function showlog(type, area, message) {
+  // Show either a success log or an error log on either the upload or full form box.
+  // Type can be one of success or fail
+  // Area can be one of upload or form
+  console.log(`Showing log with message: ${message}`);
+  const selector = `.${area} .log#${type}`;
+  if (type === 'success') {
+    // $(`.${selector} pre`).text(message);
+  } else {
+    $(`${selector} pre`).text(message);
+  }
+  $(selector).addClass('show');
+}
+
+let isOpen = false;
+// Manage opening and closing of step 2
+function openStepTwo() {
+  if (isOpen) { console.log('Not opening StepTwo'); return; }
+  console.log('Opening StepTwo');
+  $('#step2').animate({ opacity: 1, height: 'toggle' }, 250);
+  isOpen = true;
+}
+
+function closeStepTwo() {
+  if (!isOpen) { console.log('Not closing StepTwo'); return; }
+  console.log('Closing StepTwo');
+  $('#step2').animate({ opacity: 0, height: 'toggle' }, 250);
+  isOpen = false;
+}
+
 $(document).ready(() => {
   // Create dropzone form
   $('#upload-zone').dropzone({
     url: '/upload',
     maxFilesize: 2, // MB
     acceptedFiles: '.csv,.xls,.xlsx',
-    autoProcessQueue: false,
+    autoProcessQueue: true,
     maxFiles: 1,
     previewTemplate: `
     <div class='dz-details row text-left'>
@@ -39,27 +79,35 @@ $(document).ready(() => {
       // Source: https://stackoverflow.com/a/26035954/3902950
       this.on('maxfilesexceeded', function (file) {
         console.log('User adding new file, remove existing.');
-        
-        this.removeAllFiles();
-        this.addFile(file);
-      });
 
-      // Validate file on upload
-      this.on('addedfile', (file) => {
-        const reader = new FileReader();
-        reader.onload = validate;
-        reader.readAsArrayBuffer(file);
+        this.removeAllFiles(true);
+        this.addFile(file);
       });
 
       // Clear validation on new file
       this.on('removedfile', () => {
+        if (this.files.length > 0) { return; }
         $('.log').removeClass('show');
         $('.log pre').text('');
       });
 
+      // Show error and remove file on error
+      this.on('error', (e, msg) => {
+        if (e.status !== 'error') {return;}
+        console.log('An error occured!');
+        console.log(e);
+        showlog('error', 'upload', msg);
+        // Remove other file if it exists
+        if (this.files.length > 1) {
+          this.removeFile(this.files[0]);
+        }
+        // Close StepTwo
+        closeStepTwo();
+      })
+
       // Show next step when files added
-      this.on('maxfilesreached', () => { $('#step2').animate({opacity: 1, height: 'toggle' }, 250); });
-      this.on('removedfile', () => { $('#step2').animate({ opacity: 0, height: 'toggle' }, 250); });
+      this.on('maxfilesreached', openStepTwo);
+      this.on('removedfile', closeStepTwo);
     }
   });
 
@@ -82,19 +130,6 @@ $(document).ready(() => {
   $('#step2').animate({ opacity: 1, height: 'toggle' }, 0);
 });
 
-function showlog(type, area, message) {
-  // Show either a success log or an error log on either the upload or full form box.
-  // Type can be one of success or fail
-  // Area can be one of upload or form
-  const selector = `.${area} .log#${type}`;
-  if (type === 'success') {
-    // $(`.${selector} pre`).text(message);
-  } else {
-    $(`${selector} pre`).text(message);
-  }
-  $(selector).toggleClass('show');
-}
-
 function validate(e) {
   try {
     console.log('Loading workbook..')
@@ -104,7 +139,7 @@ function validate(e) {
     // Confirm workbook has data
     if ($.isEmptyObject(workbook.Sheets)) {
       // Workbook is empty!
-      showlog('error', 'upload', 'The file you uploaded is either invalid or an empty spreadsheet!\nMake sure the file is one of the following:\n\nExcel Spreadsheets (xls,xlsx,xlsxm, etc)\nDelimiter-Separated Values (CSV/TXT)\nOpenDocument Spreadsheet (ODS)\nor any other common spreadsheet file.');
+      showlog('error', 'upload', 'The file you uploaded is either invalid or an empty spreadsheet!\nMake sure the file is one of the following:\n - Excel Spreadsheets (xls,xlsx,xlsxm, etc)\n - Delimiter-Separated Values (CSV/TXT)\n - OpenDocument Spreadsheet (ODS)\n - Any other common spreadsheet file.');
       return;
     }
 
