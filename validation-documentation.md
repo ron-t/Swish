@@ -13,12 +13,21 @@ student id number|Q1 question|Q1 answer|Q2 question|Q2 answer|Qn question|Qn ans
 - One row per student.
 - Two columns per question. Total number of columns is: 1 + (numQuestions * 2)
 
+\
+\
+\
+Ron TODO: [Before writing the CSV to JSON conversion] Add column to CSV for "description". This will mean:
+- [ ] Changes to the JSON QA file format to match.
+- [ ] Changes to the (back-end) quiz creation logic: where the description text is pulled from.
+- [ ] CSV validation rules to match: total column count now 2 + (numQuestions * 2).
+
 ### Q&A file processing and validation
 - [ ] Determine file size limit.
 - [ ] Provide template CSV/Excel file.
 - [ ] Write code to convert CSV to JSON to be processble by [Swish logic](https://github.com/ron-t/Swish/tree/master/SampleCourseOfflineJSON) in [Create.js](https://github.com/ron-t/Swish/blob/master/SampleCourseOfflineJSON/Create.js) and [util.js](https://github.com/ron-t/Swish/blob/master/SampleCourseOfflineJSON/util.js)
 
 🤔 TODO: validation rules. E.g. an answer column exists for every question column; no empty cells (including empty string); ...
+
 
 
 ## Form fields validation
