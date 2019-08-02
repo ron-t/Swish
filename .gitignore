@@ -1,7 +1,6 @@
 lib-cov
 *.seed
 *.log
-*.csv
 *.dat
 *.out
 *.pid
@@ -38,6 +37,9 @@ bower_components
 *.iml
 modules.xml
 *.ipr
+
+# Temp files
+~$*
 
 # Folder config file
 Desktop.ini
