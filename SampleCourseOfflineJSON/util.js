@@ -194,12 +194,12 @@ exports.generateIdOutputFileName = (fileName, assignmentName) => {
  */
 exports.checkTruthy = (QaObject) => {
   const qRE = /q$/
-  const answerFileUrlRE = /(\da|fileName|fileUrl)$/
+  const answerDescRE = /(\da|description)$/
 
   const result = {}
 
   for (let auid in QaObject) {
-    // Check QA values
+    // check QA values
     for (var key in QaObject[auid]) {
       // for each "q" make sure a matching "a" exists and is truthy or 0.
       if (qRE.test(key)) {
@@ -209,15 +209,15 @@ exports.checkTruthy = (QaObject) => {
         if (!aVal && aVal !== 0) {
           addError(result, `${auid}-${aKey}: ${QaObject[auid][aKey]}`)
         }
-      } else if (!answerFileUrlRE.test(key)) { // if it's also not an "a" or "fileName" or "fileUrl" field then it's not a valid property.
+      } else if (!answerDescRE.test(key)) {
+        // if it's also not an "a" or "description" field then it's not a valid property.
         console.log(`${auid} :: invalid field found: ${key}`)
       }
     }
 
-    // Check each student has a fileName and url
-    if (!(QaObject[auid].fileName && QaObject[auid].fileUrl)) {
-      // fileNames and fileUrls not used in this example.
-      // addError(result, `${auid}: missing fileName or fileUrl`)
+    // Check each student has a non-empty description.
+    if (!QaObject[auid].description) {
+      addError(result, `${auid}: missing or empty description`)
     }
   }
 

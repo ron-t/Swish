@@ -7,7 +7,7 @@
     "async": "^2.6.1",
     "csv-parse": "^4.4.1",
     "download": "^7.1.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.15",
     "node-datetime": "^2.1.2",
     "node-rest-client": "^3.1.0"
   },

@@ -1,5 +1,4 @@
 'use strict'
-const _ = require('lodash')
 const async = require('async')
 const fs = require('fs')
 const path = require('path')
@@ -8,14 +7,13 @@ const RestClient = require('node-rest-client').Client
 
 const resourcesPath = 'inOutFiles'
 
-const COURSE_ID = 00000 // Obtain from Canvas
+const COURSE_ID = 99999 // Obtain from Canvas
 const DOMAIN = 'https://auckland.beta.instructure.com:443'
 const TOKEN = 'xxxxx' // Obtain from Canvas
 
 /** Sample setup parameters for a sample "Files" assignment
 /***********************************************************/
 let QA_FILE = 'SampleFilesQA.json'
-const Q_PREFIX = '' // N/A for this example; leave as empty string.
 
 const ASSIGNMENT_TITLE = 'Files Assignment Q1-Q5'
 const STARTING_Q_NUMBER = 1
@@ -26,7 +24,6 @@ const LOCK_DATE = (new Date('2019/12/31 23:59:59')).toISOString() // End of 2019
 const TOTAL_MARKS_PER_QUIZ = 50
 const NUMBER_OF_QUESTIONS_PER_QUIZ = 5
 const MARKS_PER_QUESTION = TOTAL_MARKS_PER_QUIZ / NUMBER_OF_QUESTIONS_PER_QUIZ
-const BONUS_Q = {} // N/A for this example; leave as empty object
 
 /****************************************************************/
 
@@ -46,7 +43,9 @@ let quizIds = ['assignmentId|quizId|canvasStudentId']
 QA_FILE = path.join(resourcesPath, QA_FILE)
 let studentsQA = util.loadStudentQaFile(QA_FILE)
 
-// Check and proceed only if every question has an answer and the answer is truthy or 0
+// Check and proceed only if:
+//  - every question has an answer and the answer is truthy or 0
+//  - every student has a non-blank description
 const truthyCheckResult = util.checkTruthy(studentsQA)
 if (truthyCheckResult.errors) {
   console.error(`
@@ -77,7 +76,7 @@ function createQuizzes () {
   async.eachSeries(auids, (auid, studentDone) => {
     const title = `${ASSIGNMENT_TITLE} for ${auid}`
 
-    const description = '' // N/A for this example; leave as empty string.
+    const description = studentsQA[auid].description
 
     let quizArgs = util.newQuizArgs(title, description, TOTAL_MARKS_PER_QUIZ, NUMBER_OF_ATTEMPTS)
 
@@ -136,9 +135,9 @@ function addQuestions (quizId, auid, done) {
       let args = util.newQuestionArgs(
         i, // position
         `${i}`, // name
-        BONUS_Q[i] ? 0 : MARKS_PER_QUESTION, // 0 marks if i is bonus q
-        studentsQA[auid][`q${Q_PREFIX + i}q`].replace(/\n/g, '<br/>'),
-        studentsQA[auid][`q${Q_PREFIX + i}a`]
+        MARKS_PER_QUESTION,
+        studentsQA[auid][`q${i}q`].replace(/\n/g, '<br/>'),
+        studentsQA[auid][`q${i}a`]
       )
       client.post(url, args, (data, response) => {
         questionDone()
@@ -154,6 +153,11 @@ function addQuestions (quizId, auid, done) {
 
 function getCanvasUserIds (url) {
   client.get(url, util.standardArgs(), (data, response) => {
+    if (data.errors) { // May want to check for response.statusCode and response.statusMessage too
+      data.errors.forEach(e => console.error(e.message))
+      return
+    }
+
     // save users
     data.forEach(s => {
       if (studentsQA[s.sis_user_id]) {
