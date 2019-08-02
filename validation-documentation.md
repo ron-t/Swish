@@ -5,8 +5,8 @@ Zac to:
 Ron to:
 1. Change Swish logic to accept assignment description from JSON QA file.
    - This will be done in the [Swish repo](https://github.com/ron-t/Swish/tree/master/SampleCourseOfflineJSON)
-   - [ ] Changes to the JSON QA file format.
-   - [ ] Changes to the quiz creation logic: where the description text is pulled from.
+   - [x] Changes to the JSON QA file format.
+   - [x] Changes to the quiz creation logic: where the description text is pulled from.
    - (Private change) individualised URL generation logic.
 
 2. Add column to CSV for "description". This will mean:
@@ -25,20 +25,21 @@ After this Zac can:
 Sample JSON file is here: https://github.com/ron-t/Swish/blob/master/SampleCourseOfflineJSON/inOutFiles/SampleFilesQA.json
 - The same fields/data need to be provided, so a CSV version will look something like:
 
-student id number|Q1 question|Q1 answer|Q2 question|Q2 answer|Qn question|Qn answer|
------------------|-----------|---------|-----------|---------|-----------|---------|
-1111111|What is X?|abc|What is Y?|123|What is Z?|11
-2222222|What is X?|def|What is Y?|456|What is Z?|22
-3333333|What is X?|ghi|What is Y?|789|What is Z?|33
+student id number|description|Q1 question|Q1 answer|Q2 question|Q2 answer|Qn question|Qn answer|
+-----------------|-----------|-----------|---------|-----------|---------|-----------|---------|
+1111111|Assignment for Zac|What is X?|abc|What is Y?|123|What is Z?|11
+2222222|Assignment for Ron|What is X?|def|What is Y?|456|What is Z?|22
+3333333|Assignment for Steve|What is X?|ghi|What is Y?|789|What is Z?|33
 
 - All values are text.
 - One row per student.
-- Two columns per question. Total number of columns is: 1 + (numQuestions * 2)
+- Two columns per question. Total number of columns is: 2 + (numQuestions * 2)
 
 
 ### Q&A file processing and validation
 - [ ] Determine file size limit.
-- [ ] Provide template CSV/Excel file.
+- [x] Provide template CSV/Excel file.
+  - Here: https://github.com/HexaCubist/Swish-UI/tree/master/samples-and-templates 
 - [x] ~~Write code to convert CSV to JSON to be processble by [Swish logic](https://github.com/ron-t/Swish/tree/master/SampleCourseOfflineJSON) in [Create.js](https://github.com/ron-t/Swish/blob/master/SampleCourseOfflineJSON/Create.js) and [util.js](https://github.com/ron-t/Swish/blob/master/SampleCourseOfflineJSON/util.js)~~ (Not needed since SheetJS will convert CSV/Xls to JSON)
 
 🤔 TODO: validation rules. E.g. an answer column exists for every question column; no empty cells (including empty string); ...
