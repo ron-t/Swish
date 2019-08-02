@@ -1,3 +1,25 @@
+## TODOs from 2019/08/01 meeting
+Zac to:
+1. Investigate if SwishUI code can be entirely client-side.
+
+Ron to:
+1. Change Swish logic to accept assignment description from JSON QA file.
+   - This will be done in the [Swish repo](https://github.com/ron-t/Swish/tree/master/SampleCourseOfflineJSON)
+   - [ ] Changes to the JSON QA file format.
+   - [ ] Changes to the quiz creation logic: where the description text is pulled from.
+   - (Private change) individualised URL generation logic.
+
+2. Add column to CSV for "description". This will mean:
+- [ ] CSV validation rules to match: total column count now 2 + (numQuestions * 2).  
+
+After this Zac can:
+
+3. Ensure CSV/xls to JSON conversion matches the [expected JSON QA format](https://github.com/ron-t/Swish/blob/master/SampleCourseOfflineJSON/inOutFiles/SampleFilesQA.json).
+
+4. "Module-ise" Swish logic.
+
+---
+
 ## Q&A file
 ### Q&A file format
 Sample JSON file is here: https://github.com/ron-t/Swish/blob/master/SampleCourseOfflineJSON/inOutFiles/SampleFilesQA.json
@@ -13,13 +35,6 @@ student id number|Q1 question|Q1 answer|Q2 question|Q2 answer|Qn question|Qn ans
 - One row per student.
 - Two columns per question. Total number of columns is: 1 + (numQuestions * 2)
 
-\
-\
-\
-Ron TODO: [Before writing the CSV to JSON conversion] Add column to CSV for "description". This will mean:
-- [ ] Changes to the JSON QA file format to match.
-- [ ] Changes to the (back-end) quiz creation logic: where the description text is pulled from.
-- [ ] CSV validation rules to match: total column count now 2 + (numQuestions * 2).
 
 ### Q&A file processing and validation
 - [ ] Determine file size limit.
