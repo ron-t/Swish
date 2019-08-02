@@ -10,7 +10,7 @@ Ron to:
    - (Private change) individualised URL generation logic.
 
 2. Add column to CSV for "description". This will mean:
-- [ ] CSV validation rules to match: total column count now 2 + (numQuestions * 2).  
+   - [ ] CSV validation rules to match: total column count now 2 + (numQuestions * 2).  
 
 After this Zac can:
 
@@ -39,7 +39,7 @@ student id number|Q1 question|Q1 answer|Q2 question|Q2 answer|Qn question|Qn ans
 ### Q&A file processing and validation
 - [ ] Determine file size limit.
 - [ ] Provide template CSV/Excel file.
-- [ ] Write code to convert CSV to JSON to be processble by [Swish logic](https://github.com/ron-t/Swish/tree/master/SampleCourseOfflineJSON) in [Create.js](https://github.com/ron-t/Swish/blob/master/SampleCourseOfflineJSON/Create.js) and [util.js](https://github.com/ron-t/Swish/blob/master/SampleCourseOfflineJSON/util.js)
+- [x] ~~Write code to convert CSV to JSON to be processble by [Swish logic](https://github.com/ron-t/Swish/tree/master/SampleCourseOfflineJSON) in [Create.js](https://github.com/ron-t/Swish/blob/master/SampleCourseOfflineJSON/Create.js) and [util.js](https://github.com/ron-t/Swish/blob/master/SampleCourseOfflineJSON/util.js)~~ (Not needed since SheetJS will convert CSV/Xls to JSON)
 
 🤔 TODO: validation rules. E.g. an answer column exists for every question column; no empty cells (including empty string); ...
 
@@ -90,10 +90,6 @@ student id number|Q1 question|Q1 answer|Q2 question|Q2 answer|Qn question|Qn ans
 - [x] Must be numeric.
 - [x] Leave blank for unlimited
 - Note: the Canvas API uses -1 for unlimited attempts.
-
-
-## Submission
-🤔 TODO: back-end validation rules
 
 
 ## Other issues
