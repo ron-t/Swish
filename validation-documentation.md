@@ -10,7 +10,7 @@ Ron to:
    - (Private change) individualised URL generation logic.
 
 2. Add column to CSV for "description". This will mean:
-   - [ ] CSV validation rules to match: total column count now 2 + (numQuestions * 2).  
+   - [x] CSV validation rules to match: total column count now 2 + (numQuestions * 2).  
 
 After this Zac can:
 
