@@ -71,6 +71,7 @@
     "popper.js": "^1.15.0",
     "pug": "^2.0.4",
     "request": "^2.88.0",
+    "shoot": "file:SwishSource",
     "stripe": "^7.5.0",
     "tumblr.js": "^2.0.2",
     "twilio": "^3.33.2",
