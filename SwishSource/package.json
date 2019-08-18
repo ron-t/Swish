@@ -1,5 +1,5 @@
 {
-  "name": "SwishSource",
+  "name": "swish-source",
   "version": "1.0.0",
   "description": "Swish backend handling of Swish-JSON -> Canvas API",
   "main": "Create.js",
