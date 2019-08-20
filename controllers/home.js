@@ -1,5 +1,5 @@
 const validator = require('validator');
-
+const SwishSource = require('../SwishSource');
 /**
  * GET /
  * Home page.
@@ -15,7 +15,9 @@ exports.index = (req, res) => {
  * Upload a file and begin processing.
  */
 exports.postUpload = (req, res) => {
-  // console.log(req.body);
+  console.log(req.body);
+  const s = new SwishSource();
+  console.log(s);
   // const validationErrors = [];
   // if (validator.isEmpty(req.body.name)) validationErrors.push({ msg: 'Please enter your name' });
   // if (!validator.isEmail(req.body.email)) validationErrors.push({ msg: 'Please enter a valid email address.' });
@@ -25,5 +27,5 @@ exports.postUpload = (req, res) => {
   //   req.flash('errors', validationErrors);
   //   return res.redirect('/');
   // }
-  return res.redirect('/');
+  // return res.redirect('/');
 }

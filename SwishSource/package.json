@@ -2,7 +2,7 @@
   "name": "swish-source",
   "version": "1.0.0",
   "description": "Swish backend handling of Swish-JSON -> Canvas API",
-  "main": "Create.js",
+  "main": "swish.js",
   "dependencies": {
     "async": "^2.6.1",
     "csv-parse": "^4.4.1",
