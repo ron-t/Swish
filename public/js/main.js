@@ -74,8 +74,9 @@ $(document).ready(() => {
       });
       // send all the form data along with the files:
       this.on('sendingmultiple', (data, xhr, formData) => {
-        formData.append('firstname', $('#firstname').val());
-        formData.append('lastname', $('#lastname').val());
+        console.log('Sending...');
+        formData.append('token', $('#token').val());
+        formData.append('domain', $('#domain').val());
       });
 
       // Source: https://stackoverflow.com/a/26035954/3902950
@@ -130,6 +131,12 @@ $(document).ready(() => {
 
   // Hide step 2 using JavaScript (so that it remains visible without JS)
   $('#step2').animate({ opacity: 1, height: 'toggle' }, 0);
+
+  // Sisyphus Persistance - https://sisyphus-js.herokuapp.com
+  $('form#main-form').sisyphus({
+    autoRelease: false,
+    excludeFields: '.nosave'
+  });
 });
 
 function validate(e) {
@@ -153,6 +160,8 @@ function validate(e) {
     console.log('Confirming data is valid');
     // TODO: Confirm data is valid
     showlog('success', 'upload', JSON.stringify(sheetData[0], null, 2));
+    // Set form field
+    $('#filedata').val(JSON.stringify(sheetData));
     
   } catch (error) {
     // Processing failed for uncatched reason. Log the error and show it to the user.
