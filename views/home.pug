@@ -26,32 +26,32 @@ block content
       .row
         .form-group.col-sm
           label(for='token') Token *
-          input(required,type='password',placeholder='Enter your canvas token').form-control.garlic-persist#token
+          input(required,type='password',placeholder='Enter your canvas token',name='TOKEN').form-control.garlic-persist#token
       .row
         .form-group.col-sm
           label(for='domain') Domain *
-          input(required,type='text',placeholder='Enter your Domain',value='https://auckland.instructure.com:443').form-control.garlic-persist#domain
+          input(required,type='text',placeholder='Enter your Domain',value='https://auckland.instructure.com:443',name='DOMAIN').form-control.garlic-persist#domain
         .form-group.col-sm
           label(for='courseid') Course ID *
-          input(required,type='text',placeholder='Enter your course ID').form-control.garlic-persist#courseid
+          input(required,type='text',placeholder='Enter your course ID',name='COURSE_ID').form-control.garlic-persist#courseid
       .row
         .form-group.col-sm-6
           label(for='prefix') Assignment Title Prefix *
-          input(required,type='text',placeholder='Enter the assignment title prefix').form-control#prefix
+          input(required,type='text',placeholder='Enter the assignment title prefix',name='ASSIGNMENT_TITLE').form-control#prefix
         .form-group.col-sm-3
           label(for='numqs') Number of Questions *
-          input(required,type='number',min='0',placeholder='Enter the number of questions').form-control#numqs
+          input(required,type='number',min='0',placeholder='Enter the number of questions',name='NUMBER_OF_QUESTIONS_PER_QUIZ').form-control#numqs
         .form-group.col-sm-3
           label(for='totalmarks') Total Marks *
-          input(required,type='number',min='0',placeholder='Enter the total # of marks').form-control#totalmarks
+          input(required,type='number',min='0',placeholder='Enter the total # of marks',name='TOTAL_MARKS_PER_QUIZ').form-control#totalmarks
       .row
         .form-group.col-sm-6
           label(for='derivemarks') Derive marks per Q (optional)
-          input(type='number',placeholder='Enter the derive marks per Q (optional)').form-control#derivemarks
+          input(type='number',placeholder='Enter the derive marks per Q (optional)',name='MARKS_PER_QUESTION').form-control#derivemarks
         .form-group.col-sm-3
           label(for='lockdatetime') Lock Date Time *
-          input(required,type='text',placeholder='lock date/time').form-control.datetimepicker#lockdatetime
+          input(required,type='text',placeholder='lock date/time',name='LOCK_DATE').form-control.datetimepicker#lockdatetime
         .form-group.col-sm-3
           label(for='maxattempts') Number of Attempts
-          input(type='number',placeholder='Leave blank for unlimited').form-control#maxattempts
+          input(type='number',placeholder='Leave blank for unlimited',name='NUMBER_OF_ATTEMPTS').form-control#maxattempts
       input(type='submit',value='begin').btn.btn-large.btn-success.float-right

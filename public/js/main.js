@@ -96,7 +96,7 @@ $(document).ready(() => {
 
       // Show error and remove file on error
       this.on('error', (e, msg) => {
-        if (e.status !== 'error') {return;}
+        if (e.status !== 'error') { return; }
         console.log('An error occured!');
         console.log(e);
         showlog('error', 'upload', msg);
@@ -106,7 +106,7 @@ $(document).ready(() => {
         }
         // Close StepTwo
         closeStepTwo();
-      })
+      });
 
       // Show next step when files added
       this.on('maxfilesreached', openStepTwo);
@@ -135,13 +135,38 @@ $(document).ready(() => {
   // Sisyphus Persistance - https://sisyphus-js.herokuapp.com
   $('form#main-form').sisyphus({
     autoRelease: false,
-    excludeFields: '.nosave'
+    excludeFields: $('.nosave')
+  });
+
+  // prepare all forms for ajax submission
+  $('form#main-form').on('submit', (e) => {
+    e.preventDefault(); // <-- important
+    $.ajax({
+      url: '/upload',
+      type: 'post',
+      data: $('form#main-form').serialize(),
+      xhr() {
+        const xhr = $.ajaxSettings.xhr();
+        xhr.onprogress = (e) => {
+          const r = e.currentTarget.response;
+          console.log(r);
+          $('.log#success').text(r);
+        };
+        return xhr;
+      }
+    });
+  });
+  $('form#main-form').ajaxForm({
+    target: '.log#success',
+    uploadProgress: (e, pos, total, percentComplete) => {
+      console.log(e, pos, total, percentComplete);
+    }
   });
 });
 
 function validate(e) {
   try {
-    console.log('Loading workbook..')
+    console.log('Loading workbook..');
     const data = new Uint8Array(e.target.result);
     const workbook = XLSX.read(data, { type: 'array' });
 
@@ -159,10 +184,29 @@ function validate(e) {
     console.log(sheetData);
     console.log('Confirming data is valid');
     // TODO: Confirm data is valid
-    showlog('success', 'upload', JSON.stringify(sheetData[0], null, 2));
+    // Format data in correct way
+    const studentsQA = {};
+    sheetData.forEach((student) => {
+      studentsQA[student['student id number']] = {
+        description: student.description,
+      };
+      // Loop over questions in student
+      // eslint-disable-next-line no-restricted-syntax
+      for (const [key, val] of Object.entries(student)) {
+        let n = key.match(/Q(\d+) question/);
+        if (n) {
+          studentsQA[student['student id number']][`q${n[1]}q`] = val;
+        } else {
+          n = key.match(/Q(\d+) answer/);
+          if (n) {
+            studentsQA[student['student id number']][`q${n[1]}a`] = val;
+          }
+        }
+      }
+    });
+    showlog('success', 'upload', JSON.stringify(studentsQA[Object.keys(studentsQA)[0]], null, 2));
     // Set form field
-    $('#filedata').val(JSON.stringify(sheetData));
-    
+    $('#filedata').val(JSON.stringify(studentsQA));
   } catch (error) {
     // Processing failed for uncatched reason. Log the error and show it to the user.
     console.log('Loading failed!');

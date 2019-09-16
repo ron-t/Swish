@@ -2,7 +2,7 @@
  * Module dependencies.
  */
 const express = require('express');
-const compression = require('compression');
+// // const compression = require('compression');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
@@ -65,7 +65,7 @@ app.set('port', process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.use(expressStatusMonitor());
-app.use(compression());
+// app.use(compression());
 app.use(sass({
   src: path.join(__dirname, 'public'),
   dest: path.join(__dirname, 'public'),
@@ -89,7 +89,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use((req, res, next) => {
-  if (req.path === '/api/upload') {
+  if (req.path === '/upload') {
     // Multer multipart/form-data handling needs to occur before the Lusca CSRF check.
     next();
   } else {
@@ -106,13 +106,13 @@ app.use((req, res, next) => {
 app.use((req, res, next) => {
   // After successful login, redirect back to the intended page
   if (!req.user
-    && req.path !== '/login'
-    && req.path !== '/signup'
-    && !req.path.match(/^\/auth/)
-    && !req.path.match(/\./)) {
+        && req.path !== '/login'
+        && req.path !== '/signup'
+        && !req.path.match(/^\/auth/)
+        && !req.path.match(/\./)) {
     req.session.returnTo = req.originalUrl;
   } else if (req.user
-    && (req.path === '/account' || req.path.match(/^\/api/))) {
+        && (req.path === '/account' || req.path.match(/^\/api/))) {
     req.session.returnTo = req.originalUrl;
   }
   next();
@@ -131,7 +131,7 @@ app.use('/webfonts', express.static(path.join(__dirname, 'node_modules/@fortawes
  * Primary app routes.
  */
 app.get('/', homeController.index);
-app.post('/upload', homeController.postUpload);
+app.post('/upload', lusca({ csrf: false }), homeController.postUpload);
 // app.get('/login', userController.getLogin);
 // app.post('/login', userController.postLogin);
 // app.get('/logout', userController.logout);
