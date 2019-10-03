@@ -179,7 +179,9 @@ function validate(e) {
 
     console.log('Workbook found! Processing...');
     console.log(workbook);
-    const sheetData = XLSX.utils.sheet_to_json(workbook.Sheets.Sheet1);
+    // Get first sheet
+    const sheetOne = workbook.Sheets[workbook.SheetNames[0]];
+    const sheetData = XLSX.utils.sheet_to_json(sheetOne);
     console.log('Converted to JSON object.');
     console.log(sheetData);
     console.log('Confirming data is valid');
