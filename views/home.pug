@@ -30,7 +30,9 @@ block content
       .row
         .form-group.col-sm
           label(for='domain') Domain *
-          input(required,type='text',placeholder='Enter your Domain',value='https://auckland.instructure.com:443',name='DOMAIN').form-control.garlic-persist#domain
+          select(required,name='DOMAIN').form-control.nosave
+            option(value='0') PUBLIC! (https://auckland.instructure.com:443)
+            option(value='1' selected) Beta (https://auckland.beta.instructure.com:443)
         .form-group.col-sm
           label(for='courseid') Course ID *
           input(required,type='text',placeholder='Enter your course ID',name='COURSE_ID').form-control.garlic-persist#courseid

@@ -20,8 +20,9 @@ exports.postUpload = (req, res) => {
   res.setHeader('Content-Type', 'text/plain');
   console.dir(res);
   const validationErrors = [];
+  const domains = ['https://auckland.instructure.com:443', 'https://auckland.beta.instructure.com:443'];
   if (validator.isEmpty(req.body.COURSE_ID)) validationErrors.push({ msg: 'Please enter your Course ID.' });
-  if (validator.isEmpty(req.body.DOMAIN)) validationErrors.push({ msg: 'Please enter a valid domain.' });
+  if (validator.isInt(req.body.DOMAIN, { min: 0, max: domains.length - 1 })) validationErrors.push({ msg: 'Please enter a valid domain.' });
   if (validator.isEmpty(req.body.TOKEN)) validationErrors.push({ msg: 'Please enter a valid token.' });
   if (validator.isEmpty(req.body.filedata)) validationErrors.push({ msg: 'The file you uploaded did not contain valid data.' });
   if (validator.isEmpty(req.body.LOCK_DATE)) validationErrors.push({ msg: 'You must choose a date to lock the assignment on.' });
@@ -35,11 +36,10 @@ exports.postUpload = (req, res) => {
   console.log(req.body.filedata);
   const s = new SwishSource({
     COURSE_ID: req.body.COURSE_ID,
-    DOMAIN: req.body.DOMAIN,
+    DOMAIN: domains[parseInt(req.body.DOMAIN, 10)],
     TOKEN: req.body.TOKEN,
     studentsQA: JSON.parse(req.body.filedata),
     ASSIGNMENT_TITLE: req.body.ASSIGNMENT_TITLE,
-    // STARTING_Q_NUMBER: req.body.STARTING_Q_NUMBER,
     NUMBER_OF_ATTEMPTS: req.body.NUMBER_OF_ATTEMPTS !== '' ? req.body.NUMBER_OF_ATTEMPTS : 0,
     LOCK_DATE: (new Date('2019/12/31 23:59:59')).toISOString(),
     TOTAL_MARKS_PER_QUIZ: req.body.TOTAL_MARKS_PER_QUIZ,
