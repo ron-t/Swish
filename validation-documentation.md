@@ -79,7 +79,12 @@ student id number|description|Q1 question|Q1 answer|Q2 question|Q2 answer|Qn que
   ```
   We do not knowingly collect any information about you or from Canvas.
 
-  To create Canvas quizzes, SwishUI uses the information you provide on the site to make use of the Canvas API (https://canvas.auckland.ac.nz/doc/api/). None of the information you provide, or the information returned by the Canvas API is stored by us. All Canvas API calls are made securely over HTTPS to https://canvas.auckland.ac.nz or https://auckland.beta.instructure.com or https://auckland.test.instructure.com.
+  To create Canvas quizzes, SwishUI uses the information you provide on the site 
+  to make use of the Canvas API (https://canvas.auckland.ac.nz/doc/api/). None of 
+  the information you provide, or the information returned by the Canvas API is 
+  stored by us. All Canvas API calls are made securely over HTTPS to 
+  https://canvas.auckland.ac.nz or https://auckland.beta.instructure.com or 
+  https://auckland.test.instructure.com.
 
   This policy was last updated on 7 November 2019.
   ```
