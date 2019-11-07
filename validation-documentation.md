@@ -1,6 +1,3 @@
-
----
-
 ## Q&A file
 ### Q&A file format
 Sample JSON file is here: https://github.com/ron-t/Swish/blob/master/SampleCourseOfflineJSON/inOutFiles/SampleFilesQA.json
@@ -32,7 +29,8 @@ student id number|description|Q1 question|Q1 answer|Q2 question|Q2 answer|Qn que
 
 ### Token
 - [x] Must be provided.
-- [ ] Link to page with guide on how to generate a token.
+- [ ] Link to page with guide on how to generate a token: https://github.com/ron-t/Swish/tree/master/Documents
+  - Other documentation/guides should be place here too. 
 
 ### Domain
 - [ ] Only allow 3 selectable options. Option 2 is default.
@@ -89,7 +87,7 @@ student id number|description|Q1 question|Q1 answer|Q2 question|Q2 answer|Qn que
   This policy was last updated on 7 November 2019.
   ```
 - [ ] Add link to source code: https://github.com/ron-t/Swish
-
+---
 ## [x] TODOs from 2019/08/01 meeting
 ~~Zac to:~~
 1. ~~Investigate if SwishUI code can be entirely client-side.~~
