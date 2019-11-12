@@ -4,7 +4,7 @@ block content
   form(action='/upload',method='post')#main-form
     #step1
       h1.title Step One
-      div.help.alert.alert-light Upload your quiz questions below as an Excel or CSV file. If you're not sure how to make this file, start with one of the example files #[a(href='https://github.com/ron-t/Swish/tree/master/SwishUI/samples-and-templates', style='text-decoration: underline') here]. If an Excel or multi-sheet file is used, only the first sheet will be read.
+      div.help.alert.alert-light Upload your quiz questions below as an Excel or CSV file. If you're not sure how to make this file, start with one of the example files #[a(href='https://github.com/ron-t/Swish/tree/master/SwishUI/samples-and-templates') here]. If an Excel or multi-sheet file is used, only the first sheet will be read.
       input(type='hidden', name='_csrf', value=_csrf).nosave
       input(type='hidden', name='filedata').nosave#filedata
       .card.upload#upload-zone
@@ -22,7 +22,7 @@ block content
     #step2.container
       h1.title Step Two
       p.help Fill out the following information. You can find out how to get your Token & Course ID 
-        a(href='#') here
+        a(href='https://github.com/ron-t/Swish/blob/master/Documents/Guide%20to%20Access%20Token%20Generation.pdf') here
       .row
         .form-group.col-sm
           label(for='token') Token *
