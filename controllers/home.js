@@ -30,8 +30,9 @@ exports.postUpload = (req, res) => {
   if (validator.isEmpty(req.body.NUMBER_OF_QUESTIONS_PER_QUIZ)) validationErrors.push({ msg: 'You must give the number of questions per quiz.' });
 
   if (validationErrors.length) {
-    req.flash('errors', validationErrors);
-    res.end({ error: 'something blew up' });
+    res.write(`There was an issue with the settings you chose: \n${validationErrors.map(a => a.msg).join('\n')}\n`);
+    res.end('Finished.');
+    return;
   }
   console.log(req.body.filedata);
   const s = new SwishSource({
