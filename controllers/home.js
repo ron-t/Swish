@@ -21,7 +21,7 @@ exports.postUpload = (req, res) => {
   console.dir(res);
   const validationErrors = [];
   const domains = ['https://auckland.instructure.com:443', 'https://auckland.beta.instructure.com:443', 'https://auckland.test.instructure.com:443'];
-  if (validator.isEmpty(req.body.COURSE_ID)) validationErrors.push({ msg: 'Please enter your Course ID.' });
+  if (!validator.isInt(req.body.COURSE_ID)) validationErrors.push({ msg: 'Please enter a valid (numeric) Course ID.' });
   if (!validator.isInt(req.body.DOMAIN, { min: 0, max: domains.length - 1 })) validationErrors.push({ msg: 'Please enter a valid domain.' });
   if (validator.isEmpty(req.body.TOKEN)) validationErrors.push({ msg: 'Please enter a valid token.' });
   if (validator.isEmpty(req.body.filedata)) validationErrors.push({ msg: 'The file you uploaded did not contain valid data.' });

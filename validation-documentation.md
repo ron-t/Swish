@@ -34,13 +34,13 @@ student id number|description|Q1 question|Q1 answer|Q2 question|Q2 answer|Qn que
   - Other documentation/guides should be place here too. 
 
 ### Domain
-- [X] Only allow 3 selectable options. Option 2 is default.
+- [x] Only allow 3 selectable options. Option 2 is default.
 1. https://canvas.auckland.ac.nz
 2. https://auckland.beta.instructure.com
 3. https://auckland.test.instructure.com
 
 ### Course ID
-- [ ] Must be numeric.
+- [x] Must be numeric.
 - ~~(?) Must be valid. Not sure if this is worth checking.~~ 
   - **Not worth checking (other errors will occur if the course id is wrong).**
   - ~~Logic would be something like an async GET call to the [Canvas API](https://canvas.auckland.ac.nz/doc/api/courses.html#method.courses.show) using the provided Token ; Endpoint: /api/v1/courses/:id ; Invalid if "unauthorised error" returned ; Valid if course data returned.~~
