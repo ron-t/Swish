@@ -4,7 +4,7 @@ block content
   form(action='/upload',method='post')#main-form
     #step1
       h1.title Step One
-      p.help Upload your quiz questions as an Excel or CSV file. If you're not sure how to make this file, get in touch with Ron Tiong at r.tiong@auckland.ac.nz for more information.
+      div.help.alert.alert-light Upload your quiz questions below as an Excel or CSV file. If you're not sure how to make this file, start with one of the example files #[a(href='https://github.com/ron-t/Swish/tree/master/SwishUI/samples-and-templates', style='text-decoration: underline') here]. If an Excel or multi-sheet file is used, only the first sheet will be read.
       input(type='hidden', name='_csrf', value=_csrf).nosave
       input(type='hidden', name='filedata').nosave#filedata
       .card.upload#upload-zone
