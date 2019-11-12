@@ -11,6 +11,16 @@ exports.index = (req, res) => {
 };
 
 /**
+ * GET /privacy/
+ * Home page.
+ */
+exports.privacy = (req, res) => {
+  res.render('privacy', {
+    title: 'Privacy Policy'
+  });
+};
+
+/**
  * POST /upload
  * Upload a file and begin processing.
  */
@@ -26,7 +36,7 @@ exports.postUpload = (req, res) => {
   if (!validator.isLength(req.body.ASSIGNMENT_TITLE, { min: 0, max: 254 })) validationErrors.push({ msg: 'Your assignment title prefix is too long (more than 254 characters)' });
   if (validator.isEmpty(req.body.TOKEN)) validationErrors.push({ msg: 'Please enter a valid token.' });
   if (validator.isEmpty(req.body.filedata)) validationErrors.push({ msg: 'The file you uploaded did not contain valid data.' });
-  if (validator.isEmpty(req.body.LOCK_DATE)) validationErrors.push({ msg: 'You must choose a date to lock the assignment on.' });
+  if (validator.toDate(req.body.LOCK_DATE) === null) validationErrors.push({ msg: 'Please enter a valid date.' });
   if (validator.isEmpty(req.body.TOTAL_MARKS_PER_QUIZ)) validationErrors.push({ msg: 'You must give the total marks per quiz.' });
   if (!validator.isInt(req.body.NUMBER_OF_QUESTIONS_PER_QUIZ)) validationErrors.push({ msg: 'You must give the number of questions per quiz.' });
 

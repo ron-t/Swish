@@ -1,4 +1,4 @@
-/**
+/**8
  * Module dependencies.
  */
 const express = require('express');
@@ -89,6 +89,7 @@ app.use('/webfonts', express.static(path.join(__dirname, 'node_modules/@fortawes
  * Primary app routes.
  */
 app.get('/', homeController.index);
+app.get('/privacy', homeController.privacy);
 app.post('/upload', lusca({ csrf: false }), homeController.postUpload);
 
 

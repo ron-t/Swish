@@ -59,9 +59,9 @@ student id number|description|Q1 question|Q1 answer|Q2 question|Q2 answer|Qn que
 
 ### Lock date time
 - [x] Must be datetime.
-- [ ] Date format should be DD/MM/YYYY instead of MM/DD/YYYY.
+- [X] Date format should be DD/MM/YYYY instead of MM/DD/YYYY.
 - [ ] Check that timezones are correct. I.e. the lock date time provided in the form is exactly the same as what appears on Canvas; it will still work when daylight savings changes for NZTime.
-- [ ] Explain that lock date will also be the due date.
+- [x] Explain that lock date will also be the due date.
 - ~~[ ] Consider allowing a due date separate to lock date.~~
 
 ### Number of attempts
@@ -71,10 +71,10 @@ student id number|description|Q1 question|Q1 answer|Q2 question|Q2 answer|Qn que
 
 
 ## Other issues
-- [ ] Remove "Derive marks per Q" field. Force marks to be evenly distributed across questions.
-- [ ] Change copyright ownership to Zac and Ron.
-- [ ] Add note crediting SEED Fund 2019 for enabling SwishUI to be created.
-- [ ] Consistent capitalisation or naming scheme for field names.
+- [x] Remove "Derive marks per Q" field. Force marks to be evenly distributed across questions.
+- [x] Change copyright ownership to Zac and Ron.
+- [x] Add note crediting SEED Fund 2019 for enabling SwishUI to be created.
+- [x] Consistent capitalisation or naming scheme for field names.
 - [ ] Add privacy policy. Use the text below. This means we must **not keep any logs** of any sort. And definitely **no click analytics** or any of that sort of thing :)
   ```
   We do not knowingly collect any information about you or from Canvas.

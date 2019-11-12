@@ -126,7 +126,9 @@ $(document).ready(() => {
       today: 'mi mi-today',
       clear: 'mi mi-trash',
       close: 'mi mi-remove'
-    }
+    },
+    locale: 'en-nz',
+    format: 'DD/MM/YYYY hh:mm A'
   });
 
   // Hide step 2 using JavaScript (so that it remains visible without JS)
