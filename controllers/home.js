@@ -23,11 +23,12 @@ exports.postUpload = (req, res) => {
   const domains = ['https://auckland.instructure.com:443', 'https://auckland.beta.instructure.com:443', 'https://auckland.test.instructure.com:443'];
   if (!validator.isInt(req.body.COURSE_ID)) validationErrors.push({ msg: 'Please enter a valid (numeric) Course ID.' });
   if (!validator.isInt(req.body.DOMAIN, { min: 0, max: domains.length - 1 })) validationErrors.push({ msg: 'Please enter a valid domain.' });
+  if (!validator.isLength(req.body.ASSIGNMENT_TITLE, { min: 0, max: 254 })) validationErrors.push({ msg: 'Your assignment title prefix is too long (more than 254 characters)' });
   if (validator.isEmpty(req.body.TOKEN)) validationErrors.push({ msg: 'Please enter a valid token.' });
   if (validator.isEmpty(req.body.filedata)) validationErrors.push({ msg: 'The file you uploaded did not contain valid data.' });
   if (validator.isEmpty(req.body.LOCK_DATE)) validationErrors.push({ msg: 'You must choose a date to lock the assignment on.' });
   if (validator.isEmpty(req.body.TOTAL_MARKS_PER_QUIZ)) validationErrors.push({ msg: 'You must give the total marks per quiz.' });
-  if (validator.isEmpty(req.body.NUMBER_OF_QUESTIONS_PER_QUIZ)) validationErrors.push({ msg: 'You must give the number of questions per quiz.' });
+  if (!validator.isInt(req.body.NUMBER_OF_QUESTIONS_PER_QUIZ)) validationErrors.push({ msg: 'You must give the number of questions per quiz.' });
 
   if (validationErrors.length) {
     res.write(`There was an issue with the settings you chose: \n${validationErrors.map(a => a.msg).join('\n')}\n`);

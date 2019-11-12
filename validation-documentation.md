@@ -47,11 +47,12 @@ student id number|description|Q1 question|Q1 answer|Q2 question|Q2 answer|Qn que
 
 ### Assignment title prefix
 - [x] Must be provided.
-- [ ] Impose **254** character limit.
+- [x] Impose **254** character limit.
 
 ### Number of questions
 - [x] Must be integer.
-- [ ] Should match the number of questions and answers provided in the uploaded file. Perhaps this could be automatically populated; if not, it would serve as a cross-check before submission.
+- [x] Should match the number of questions and answers provided in the uploaded file. Perhaps this could be automatically populated; if not, it would serve as a cross-check before submission.
+  - Automatically populated
 
 ### Total marks
 - [x] Must be numeric.

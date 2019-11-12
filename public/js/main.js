@@ -209,6 +209,8 @@ function validate(e) {
     showlog('success', 'upload', JSON.stringify(studentsQA[Object.keys(studentsQA)[0]], null, 2));
     // Set form field
     $('#filedata').val(JSON.stringify(studentsQA));
+    // Set number of questions (Based on the first student # of keys minus one for the description)
+    $('#numqs').val((Object.keys(studentsQA[Object.keys(studentsQA)[0]]).length - 1) / 2);
   } catch (error) {
     // Processing failed for uncatched reason. Log the error and show it to the user.
     console.log('Loading failed!');
