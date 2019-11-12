@@ -46,7 +46,7 @@ $(document).ready(() => {
   // Create dropzone form
   $('#upload-zone').dropzone({
     url: '/upload',
-    maxFilesize: 2, // MB
+    maxFilesize: 15, // MB
     acceptedFiles: '.csv,.xls,.xlsx',
     autoProcessQueue: true,
     maxFiles: 1,
