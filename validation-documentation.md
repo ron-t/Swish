@@ -30,11 +30,11 @@ student id number|description|Q1 question|Q1 answer|Q2 question|Q2 answer|Qn que
 
 ### Token
 - [x] Must be provided.
-- [ ] Link to page with guide on how to generate a token: https://github.com/ron-t/Swish/tree/master/Documents
+- [x] Link to page with guide on how to generate a token: https://github.com/ron-t/Swish/tree/master/Documents
   - Other documentation/guides should be place here too. 
 
 ### Domain
-- [ ] Only allow 3 selectable options. Option 2 is default.
+- [X] Only allow 3 selectable options. Option 2 is default.
 1. https://canvas.auckland.ac.nz
 2. https://auckland.beta.instructure.com
 3. https://auckland.test.instructure.com

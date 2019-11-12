@@ -31,8 +31,9 @@ block content
         .form-group.col-sm
           label(for='domain') Domain *
           select(required,name='DOMAIN').form-control.nosave
-            option(value='0') PUBLIC! (https://auckland.instructure.com:443)
-            option(value='1' selected) Beta (https://auckland.beta.instructure.com:443)
+            option(value='0') ⚠️PUBLIC (https://auckland.instructure.com)
+            option(value='1' selected) Beta (https://auckland.beta.instructure.com)
+            option(value='2') Test (https://auckland.test.instructure.com)
         .form-group.col-sm
           label(for='courseid') Course ID *
           input(required,type='text',placeholder='Enter your course ID',name='COURSE_ID').form-control.garlic-persist#courseid
