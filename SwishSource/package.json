@@ -1,6 +1,6 @@
 {
   "name": "swish-source",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Swish backend handling of Swish-JSON -> Canvas API",
   "main": "swish.js",
   "dependencies": {
