@@ -45,7 +45,6 @@ exports.postUpload = (req, res) => {
     res.end('Finished.');
     return;
   }
-  console.log(req.body.filedata);
   const s = new SwishSource({
     COURSE_ID: req.body.COURSE_ID,
     DOMAIN: domains[parseInt(req.body.DOMAIN, 10)],
@@ -58,18 +57,14 @@ exports.postUpload = (req, res) => {
     NUMBER_OF_QUESTIONS_PER_QUIZ: req.body.NUMBER_OF_QUESTIONS_PER_QUIZ,
     MARKS_PER_QUESTION: req.body.TOTAL_MARKS_PER_QUIZ / req.body.NUMBER_OF_QUESTIONS_PER_QUIZ
   });
-  console.log(s);
 
   function resHandler(p, msg, err = '') {
-    console.log(res, err);
     if (err !== '') {
       console.error(`Error: ${err}`);
       res.write(`Error: ${err}\n`);
       return;
     }
     res.write(`${p.toFixed(2)}%: ${msg}\n`);
-    console.log(`Progress: ${p.toFixed(2)}%`);
-    console.log(`Message: ${msg}`);
     if (p >= 100) { res.end('Finished.'); }
   }
   s.start(resHandler);

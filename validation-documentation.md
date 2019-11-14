@@ -75,7 +75,7 @@ student id number|description|Q1 question|Q1 answer|Q2 question|Q2 answer|Qn que
 - [x] Change copyright ownership to Zac and Ron.
 - [x] Add note crediting SEED Fund 2019 for enabling SwishUI to be created.
 - [x] Consistent capitalisation or naming scheme for field names.
-- [ ] Add privacy policy. Use the text below. This means we must **not keep any logs** of any sort. And definitely **no click analytics** or any of that sort of thing :)
+- [x] Add privacy policy. Use the text below. This means we must **not keep any logs** of any sort. And definitely **no click analytics** or any of that sort of thing :)
   ```
   We do not knowingly collect any information about you or from Canvas.
 
