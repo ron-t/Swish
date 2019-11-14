@@ -1,4 +1,5 @@
 const validator = require('validator');
+const moment = require('moment');
 const SwishSource = require('../SwishSource');
 /**
  * GET /
@@ -36,7 +37,7 @@ exports.postUpload = (req, res) => {
   if (!validator.isLength(req.body.ASSIGNMENT_TITLE, { min: 0, max: 254 })) validationErrors.push({ msg: 'Your assignment title prefix is too long (more than 254 characters)' });
   if (validator.isEmpty(req.body.TOKEN)) validationErrors.push({ msg: 'Please enter a valid token.' });
   if (validator.isEmpty(req.body.filedata)) validationErrors.push({ msg: 'The file you uploaded did not contain valid data.' });
-  if (validator.toDate(req.body.LOCK_DATE) === null) validationErrors.push({ msg: 'Please enter a valid date.' });
+  if (!moment(req.body.LOCK_DATE, 'DD/MM/YYYY hh:mm a', true).isValid()) validationErrors.push({ msg: 'Please enter a valid date in the format "DD/MM/YYYY hh:mm a".' });
   if (validator.isEmpty(req.body.TOTAL_MARKS_PER_QUIZ)) validationErrors.push({ msg: 'You must give the total marks per quiz.' });
   if (!validator.isInt(req.body.NUMBER_OF_QUESTIONS_PER_QUIZ)) validationErrors.push({ msg: 'You must give the number of questions per quiz.' });
 
@@ -52,7 +53,7 @@ exports.postUpload = (req, res) => {
     studentsQA: JSON.parse(req.body.filedata),
     ASSIGNMENT_TITLE: req.body.ASSIGNMENT_TITLE,
     NUMBER_OF_ATTEMPTS: req.body.NUMBER_OF_ATTEMPTS !== '' ? req.body.NUMBER_OF_ATTEMPTS : 0,
-    LOCK_DATE: (new Date('2019/12/31 23:59:59')).toISOString(),
+    LOCK_DATE: moment(req.body.LOCK_DATE, 'DD/MM/YYYY hh:mm a', true).format(),
     TOTAL_MARKS_PER_QUIZ: req.body.TOTAL_MARKS_PER_QUIZ,
     NUMBER_OF_QUESTIONS_PER_QUIZ: req.body.NUMBER_OF_QUESTIONS_PER_QUIZ,
     MARKS_PER_QUESTION: req.body.TOTAL_MARKS_PER_QUIZ / req.body.NUMBER_OF_QUESTIONS_PER_QUIZ

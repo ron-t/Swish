@@ -46,7 +46,7 @@ const SwishSource = class {
          * API call to get list of students' CanvasId and AUID
          * Read from .json file a list of students (by AUID) and for each student:
          *    Create quiz
-         *    Add questions (read from .json file)
+         *    Add questions (read from .json file or as object given)
          *    Add override
          */
     // Load student questions and answers
