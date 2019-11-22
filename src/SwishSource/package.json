@@ -5,7 +5,7 @@
   "main": "swish.js",
   "dependencies": {
     "async": "^2.6.1",
-    "csv-parse": "^4.4.1",
+    "csv-parse": "^4.4.6",
     "download": "^7.1.0",
     "lodash": "^4.17.15",
     "node-datetime": "^2.1.2",
