@@ -1,0 +1,49 @@
+body {
+    background-image: url(/img/bg-2.jpg);
+    background-image: linear-gradient(to bottom, #00000085, transparent),url(/img/bg-2.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll,fixed;
+    min-height: 100vh;
+}
+
+header .logo path {
+    fill: white;
+}
+
+header {
+    width: 300px;
+    margin: auto;
+    padding-top: 3em;
+}
+
+.title {
+    font-family: 'Amatic SC';
+    text-align: center;
+    font-size: 4rem;
+}
+
+footer {
+    color: white;
+}
+
+footer .footertext{
+    width: 100%;
+}
+
+footer p.list-inline-item {
+    padding: .9375rem;
+}
+
+footer a:hover {
+    color: rgba(255, 255, 255, 0.637);
+}
+
+main {
+    text-align: center;
+    margin-bottom: 2em;
+}
+
+main a {
+    text-decoration: underline;
+}

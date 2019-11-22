@@ -1,0 +1,141 @@
+#upload-zone {
+    overflow: hidden;
+    max-width: 600px;
+    margin: auto;
+    display: block;
+    cursor: pointer;
+    background: #F5F5F5;
+    position: relative;
+    transition: 0.25s ease all;
+}
+
+// When upload complete, hide body of card
+div#upload-zone.dz-started .card-body {
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    padding: 0;
+}
+
+#upload-zone .card-body {
+    pointer-events: none;
+    user-select: none;
+    transition: 0.25s ease all;
+    height: 12em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#upload-zone .card-body h1 {
+    margin: 0;
+}
+
+#upload-zone .card-body * {
+    width: 100%;
+}
+
+#upload-zone.dz-drag-hover .card-body {
+    opacity: 0.5;
+}
+
+// Include basic dropzone styling
+#upload-zone .dz-progress {
+    display: block;
+    height: 15px;
+    border: 1px solid #aaa;
+}
+
+#upload-zone .dz-progress .dz-upload {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: green;
+}
+
+#upload-zone .dz-details .dz-error-message {
+    color: red;
+    display: none;
+}
+
+#upload-zone .dz-details.dz-error .dz-error-message,
+#upload-zone .dz-details.dz-error .dz-error-mark {
+    display: block;
+}
+
+#upload-zone .dz-details.dz-success .dz-success-mark {
+    display: block;
+}
+
+#upload-zone .dz-details .dz-error-mark,
+#upload-zone .dz-details .dz-success-mark {
+    position: absolute;
+    display: none;
+    left: 30px;
+    top: 30px;
+    width: 54px;
+    height: 58px;
+    left: 50%;
+    margin-left: -27px;
+}
+
+// Custom dropzone styling
+.dz-remove {
+    font-size: 1.1em;
+    text-align: right;
+}
+
+.dz-details {
+    margin: 0 15px;
+}
+
+.dz-details > .dz-detail {
+    position: relative;
+    padding: 12px 0;
+    margin: .3125rem 0px;
+    font-size: 1em;
+    font-weight: 400;
+    line-height: 1.42857;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+
+// Error/Success log box
+.log#error{background: #FBE9E7;}
+.log#success{background: #E8F5E9;}
+.log {
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+    width: 100%;
+    border: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 0em 2em 0em 2em;
+    font-weight: bold;
+    transition: 0.25s ease all;
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+}
+.log#error pre{color: #E91E63;}
+.log pre {
+    margin: 0;
+}
+
+.log.show#success{padding: 1em 2em 1em 2em;}
+.log.show {
+    padding: 1em 2em 0em 2em;
+    opacity: 1;
+    visibility: visible;
+    height: auto;
+    white-space: pre-line;
+}
+
+.log.show pre {
+    margin: 1em 0px;
+}
