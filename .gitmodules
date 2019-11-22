@@ -1,0 +1,3 @@
+[submodule "swish-ui"]
+	path = swish-ui
+	url = https://github.com/hexacubist/swish-ui
